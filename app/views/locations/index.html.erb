@@ -1,10 +1,17 @@
-<%= form_with url: locations_path, method: :get, class: "d-flex" do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a location"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+<form action="/location_page" method="post">
+  <input class="form-control" list="datalistOptions" name="dropdown" id="exampleDataList" placeholder="Type to search...">
+  <datalist id="datalistOptions">
+    <option value="Welcome center">
+    <option value="Bürgeramt">
+    <option value="Pharmacy">
+    <option value="Donation spot">
+  </datalist>
+  <input type="hidden" name="answer" id="answerInput-hidden">
+</form>
+
+<%= form_with url: "/location_page", method: "get", local: true do |form| %>
+ <%= form.select :location, options_for_select(["test", "test2"], selected: params[:location])%>
+ <%= form.submit "Create" %>
 <% end %>
 
 <div style="width: 100%; height: 700px;"
